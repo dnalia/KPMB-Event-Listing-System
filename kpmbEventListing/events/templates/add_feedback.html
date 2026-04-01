@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback for {{ event.eventname }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #E8F0FE;
+            margin: 0; /* Ensure no default margin */
+            padding: 0; /* Ensure no default padding */
+        }
+        header {
+            background-color: rgb(255, 253, 164); /* Pastel yellow */
+            color: #333;
+            padding: 15px;
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space between logo/title and nav */
+            align-items: center; /* Center vertically */
+        }
+        .logo img {
+            height: 80px; /* Set logo height */
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Align items in a row */
+        }
+        nav ul li {
+            margin: 0 15px; /* Space between links */
+        }
+        nav ul li a {
+            text-decoration: none; /* Remove underline */
+            color: #333; /* Dark text for links */
+        }
+        .content {
+            max-width: 600px;
+            margin: 20px auto; /* Center content */
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;  /* Increase height to make it larger */
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical; /* Allows vertical resizing */
+        }
+        button {
+            background-color: #FCE6A1; /* Pastel yellow for button */
+            color: #333;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #FDDC88; /* Slightly darker pastel yellow on hover */
+        }
+        header {
+            background-color: rgb(249, 255, 159); /* Pastel yellow */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+        .logo img {
+            height: 80px;
+        }
+        footer {
+            background-color: rgb(249, 255, 159);/* Same pastel yellow */
+            color: #333; /* Dark text for footer */
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between; /* Side by side layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        footer div {
+            flex: 1; /* Allow columns to share space */
+            min-width: 200px; /* Minimum width for responsiveness */
+        }
+        footer h3, footer h4 {
+            margin: 5px 0; /* Reduced margins for smaller size */
+            font-size: 18px; /* Smaller font size */
+        }
+        footer p {
+            margin: 5px 0; /* Reduced margins for smaller size */
+        }
+        .footer__bar {
+            background-color: #FCE6A1; /* Pastel gold for footer copyright */
+            color: #333; /* Dark text */
+            text-align: center;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="homepage.html">{% load static %} <img src="{% static 'kpmb.jpg' %}" alt="speedyrails"></a>
+        </div>
+        <h1>Feedback for {{ event.eventname }}</h1>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="index.html">Login</a></li>
+                <li><a href="#footer">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="content">
+        <form method="POST" action="{% url 'add_feedback' student.studid event.id %}">
+            {% csrf_token %}
+            <label for="feedback">Your Feedback:</label>
+            <textarea id="feedback" name="feedback" required placeholder="Write your feedback here..."></textarea>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer_cols">
+                <h3>MyKPMBEvents</h3>
+                <p>A website where you can explore and join as many event in KPMB. Gain experiences and enjoy college life.</p>
+            </div>
+            <div class="footer_cols">
+                <h4>CONTACT</h4>
+                <p>Phone No.: 012-345 6789</p>
+                <p>Email: MyKPMBEvents@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__bar">
+            <p>&copy; 2024 MyKPMBEvents. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Event</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #E3F2FD;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgb(167, 255, 159); /* Pastel yellow */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+        .logo img {
+            height: 80px;
+        }
+        footer {
+            background-color: rgb(167, 255, 159);/* Same pastel yellow */
+            color: #333; /* Dark text for footer */
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between; /* Side by side layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        footer div {
+            flex: 1; /* Allow columns to share space */
+            min-width: 200px; /* Minimum width for responsiveness */
+        }
+        footer h3, footer h4 {
+            margin: 5px 0; /* Reduced margins for smaller size */
+            font-size: 18px; /* Smaller font size */
+        }
+        footer p {
+            margin: 5px 0; /* Reduced margins for smaller size */
+        }
+        .footer__bar {
+            background-color: #c5fca1; /* Pastel gold for footer copyright */
+            color: #333; /* Dark text */
+            text-align: center;
+            padding: 10px 20px;
+        }
+        .content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #1976D2;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0D47A1;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="homepage.html">{% load static %} <img src="{% static 'kpmb.jpg' %}" alt="speedyrails"></a>
+        </div>
+        <h1>Add a New Event for {{ organizer.orgname }}</h1>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="index.html">Login</a></li>
+                <li><a href="#footer">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header><br><br><br><br><br><br><br><br><br>
+
+    <div class="content">
+        <form method="POST">
+            {% csrf_token %}
+            <label for="eventname">Event Name:</label>
+            <input type="text" id="eventname" name="eventname" placeholder="Enter event name" required>
+
+            <label for="description">Event Description:</label>
+            <textarea id="description" name="description" rows="4" placeholder="Enter event description" required></textarea>
+
+            <label for="date">Event Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit">Add Event</button>
+        </form>
+    </div>
+
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer_cols">
+                <h3>MyKPMBEvents</h3>
+                <p>A website where you can explore and join as many event in KPMB. Gain experiences and enjoy college life.</p>
+            </div>
+            <div class="footer_cols">
+                <h4>CONTACT</h4>
+                <p>Phone No.: 012-345 6789</p>
+                <p>Email: MyKPMBEvents@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__bar">
+            <p>&copy; 2024 MyKPMBEvents. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

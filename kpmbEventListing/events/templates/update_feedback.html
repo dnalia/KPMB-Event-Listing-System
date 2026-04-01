@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Feedback</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #E8F0FE;
+            margin: 0;
+            padding: 20px;
+        }
+        .content {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .update-button {
+            background-color: #5BC0DE;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cancel-button {
+            background-color: #D9534F;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px; /* Space between buttons */
+        }
+        header {
+            background-color: rgb(249, 255, 159); /* Pastel yellow */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+        .logo img {
+            height: 80px;
+        }
+        footer {
+            background-color: rgb(249, 255, 159);/* Same pastel yellow */
+            color: #333; /* Dark text for footer */
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between; /* Side by side layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        footer div {
+            flex: 1; /* Allow columns to share space */
+            min-width: 200px; /* Minimum width for responsiveness */
+        }
+        footer h3, footer h4 {
+            margin: 5px 0; /* Reduced margins for smaller size */
+            font-size: 18px; /* Smaller font size */
+        }
+        footer p {
+            margin: 5px 0; /* Reduced margins for smaller size */
+        }
+        .footer__bar {
+            background-color: #FCE6A1; /* Pastel gold for footer copyright */
+            color: #333; /* Dark text */
+            text-align: center;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="homepage.html">{% load static %} <img src="{% static 'kpmb.jpg' %}" alt="speedyrails"></a>
+        </div>
+        <h1>Update Feedback for Event: {{ event.eventname }}</h1>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="index.html">Login</a></li>
+                <li><a href="#footer">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header><br><br><br><br><br>
+    <div class="content">
+        <form method="POST">
+            {% csrf_token %}
+            <textarea name="feedback" rows="5" style="width: 100%;">{{ feedback.feedback }}</textarea>
+            <br>
+            <button type="submit" class="update-button">Update Feedback</button>
+            <a href="{% url 'view_feedback' student_id=student_id event_id=event.id %}" class="cancel-button">Cancel</a>
+        </form>
+    </div>
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer_cols">
+                <h3>MyKPMBEvents</h3>
+                <p>A website where you can explore and join as many event in KPMB. Gain experiences and enjoy college life.</p>
+            </div>
+            <div class="footer_cols">
+                <h4>CONTACT</h4>
+                <p>Phone No.: 012-345 6789</p>
+                <p>Email: MyKPMBEvents@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__bar">
+            <p>&copy; 2024 MyKPMBEvents. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

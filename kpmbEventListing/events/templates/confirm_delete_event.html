@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete Event</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #E3F2FD; /* Light blue background */
+            margin: 0;
+            display: flex; /* Use flexbox layout */
+            flex-direction: column; /* Stack children vertically */
+            min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+        }
+        header {
+            background-color: rgb(167, 255, 159); /* Pastel yellow */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+        .logo img {
+            height: 80px;
+        }
+        footer {
+            background-color: rgb(167, 255, 159);/* Same pastel yellow */
+            color: #333; /* Dark text for footer */
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between; /* Side by side layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        footer div {
+            flex: 1; /* Allow columns to share space */
+            min-width: 200px; /* Minimum width for responsiveness */
+        }
+        footer h3, footer h4 {
+            margin: 5px 0; /* Reduced margins for smaller size */
+            font-size: 18px; /* Smaller font size */
+        }
+        footer p {
+            margin: 5px 0; /* Reduced margins for smaller size */
+        }
+        .footer__bar {
+            background-color: #c5fca1; /* Pastel gold for footer copyright */
+            color: #333; /* Dark text */
+            text-align: center;
+            padding: 10px 20px;
+        }
+        .content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto; /* Center the content */
+            flex: 1; /* Allow content to grow and fill the space */
+            position: relative; /* Position relative for absolute children */
+            z-index: 1; /* Ensure it stays above the background box */
+        }
+        .content-box {
+            background-color: white; /* White background for content box */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1; /* Ensure it stays above the background box */
+        }
+        .background-box {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for the background effect */
+            position: absolute; /* Position absolutely */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            right: 0; /* Align to the right */
+            bottom: 0; /* Align to the bottom */
+            z-index: 0; /* Behind the content */
+            border-radius: 8px; /* Rounded corners */
+        }
+        .actions {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #1976D2; /* Blue */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0D47A1; /* Darker blue on hover */
+        }
+        a {
+            margin-left: 10px;
+            text-decoration: none; /* Remove underline */
+            color: #1976D2; /* Link color */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="homepage.html">{% load static %} <img src="{% static 'kpmb.jpg' %}" alt="speedyrails"></a>
+        </div>
+        <h1>Confirm Delete Event</h1>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="index.html">Login</a></li>
+                <li><a href="#footer">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header><br><br><br><br><br><br><br>
+
+    <div class="content">
+        <div class="background-box"></div> <!-- Background Box -->
+        <div class="content-box"> <!-- Content Box -->
+            <p>Are you sure you want to delete the event "<strong>{{ event.eventname }}</strong>"?</p>
+            <p><strong>Description:</strong> {{ event.description }}</p>
+            <p><strong>Date:</strong> {{ event.date }}</p>
+
+            <div class="actions">
+                <form method="POST">
+                    {% csrf_token %}
+                    <p>Are you sure you want to delete this event?</p>
+                    <h3>{{ event.eventname }}</h3>
+                    <button type="submit">Yes, delete</button>
+                    <a href="{% url 'event_list' event.org.orgid %}">Cancel</a>  <!-- Ensure this points to event_list -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer_cols">
+                <h3>MyKPMBEvents</h3>
+                <p>A website where you can explore and join as many event in KPMB. Gain experiences and enjoy college life.</p>
+            </div>
+            <div class="footer_cols">
+                <h4>CONTACT</h4>
+                <p>Phone No.: 012-345 6789</p>
+                <p>Email: MyKPMBEvents@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__bar">
+            <p>&copy; 2024 MyKPMBEvents. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

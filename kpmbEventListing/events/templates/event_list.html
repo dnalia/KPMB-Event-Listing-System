@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizer's Events</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #E3F2FD;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Stack header, content, and footer */
+            min-height: 100vh; /* Full height of the viewport */
+        }
+        header {
+            background-color: rgb(167, 255, 159); /* Pastel yellow */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+        .logo img {
+            height: 80px;
+        }
+        footer {
+            background-color: rgb(167, 255, 159);/* Same pastel yellow */
+            color: #333; /* Dark text for footer */
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between; /* Side by side layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        footer div {
+            flex: 1; /* Allow columns to share space */
+            min-width: 200px; /* Minimum width for responsiveness */
+        }
+        footer h3, footer h4 {
+            margin: 5px 0; /* Reduced margins for smaller size */
+            font-size: 18px; /* Smaller font size */
+        }
+        footer p {
+            margin: 5px 0; /* Reduced margins for smaller size */
+        }
+        .footer__bar {
+            background-color: #c5fca1; /* Pastel gold for footer copyright */
+            color: #333; /* Dark text */
+            text-align: center;
+            padding: 10px 20px;
+        }
+        .content {
+            padding: 20px;
+            margin-top: 80px; /* Add margin to separate from fixed header */
+        }
+        .event-list {
+            max-width: 800px;
+            margin: 0 auto; /* Center the event list */
+        }
+        .event-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Space between event items */
+            padding: 15px;
+            text-align: left;
+        }
+        .event-item h2 {
+            margin: 0;
+            font-size: 1.5em;
+            background-color: #c5fca1; /* Background color for event name */
+            padding: 5px; /* Padding around the event name */
+            border-radius: 5px; /* Rounded corners for the background */
+        }
+        .event-item p {
+            margin: 5px 0; /* Margins for paragraph elements */
+            color: #555; /* Darker text for description */
+        }
+        .actions {
+            margin-top: 15px; /* Space above action buttons */
+        }
+        .actions a {
+            background-color: #c5fca1; /* Background color for buttons */
+            color: white; /* Button text color */
+            text-decoration: none; /* No underline */
+            padding: 8px 12px; /* Padding for buttons */
+            border-radius: 5px; /* Rounded corners for buttons */
+            margin-right: 5px; /* Space between buttons */
+            display: inline-block; /* Align buttons horizontally */
+        }
+        .actions a:hover {
+            background-color: #b3e6a0; /* Lighter shade on hover */
+        }
+        .no-events {
+            text-align: center; /* Centered text for no events */
+            padding: 20px; /* Padding for no events message */
+            font-size: 1.2em; /* Larger font size */
+            color: #555; /* Darker text for message */
+        }
+        button:hover {
+            background-color: #0D47A1; /* Darker blue */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="homepage.html">{% load static %} <img src="{% static 'kpmb.jpg' %}" alt="speedyrails"></a>
+        </div>
+        <h1>{{ organizer.orgname }}'s Events</h1>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="index.html">Login</a></li>
+                <li><a href="#footer">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header><br><br><br>
+
+    <div class="content">
+        <div class="event-list">
+            {% if events %}
+                {% for event in events %}
+                    <div class="event-item">
+                        <h2>{{ event.eventname }}</h2>
+                        <p><strong>Date:</strong> {{ event.date }}</p>
+                        <p>{{ event.description }}</p>
+                        <div class="actions">
+                            <a href="{% url 'update_event_date' organizer.orgid event.id %}">Update Date</a>
+                            <a href="{% url 'confirm_delete_event' organizer.orgid event.id %}">Delete Event</a>
+                            <a href="{% url 'view_attendance' organizer.orgid event.id %}">View Attendance</a> 
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-events">No events found for this organizer.</p>
+            {% endif %}
+
+            <p><a href="{% url 'add_event' organizer.orgid %}">Add New Event</a></p>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer_cols">
+                <h3>MyKPMBEvents</h3>
+                <p>A website where you can explore and join as many event in KPMB. Gain experiences and enjoy college life.</p>
+            </div>
+            <div class="footer_cols">
+                <h4>CONTACT</h4>
+                <p>Phone No.: 012-345 6789</p>
+                <p>Email: MyKPMBEvents@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__bar">
+            <p>&copy; 2024 MyKPMBEvents. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

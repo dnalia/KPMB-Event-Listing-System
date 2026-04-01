@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Join Event</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgb(240, 245, 255);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures footer stays at the bottom */
+        }
+        header {
+            background-color: rgb(249, 255, 159); /* Pastel yellow */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+        .logo img {
+            height: 80px;
+        }
+        footer {
+            background-color: rgb(249, 255, 159);/* Same pastel yellow */
+            color: #333; /* Dark text for footer */
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between; /* Side by side layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        footer div {
+            flex: 1; /* Allow columns to share space */
+            min-width: 200px; /* Minimum width for responsiveness */
+        }
+        footer h3, footer h4 {
+            margin: 5px 0; /* Reduced margins for smaller size */
+            font-size: 18px; /* Smaller font size */
+        }
+        footer p {
+            margin: 5px 0; /* Reduced margins for smaller size */
+        }
+        .footer__bar {
+            background-color: #FCE6A1; /* Pastel gold for footer copyright */
+            color: #333; /* Dark text */
+            text-align: center;
+            padding: 10px 20px;
+        }
+        h1 {
+            margin: 0; /* Remove default margin */
+            font-size: 28px; /* Increase font size */
+            font-weight: bold; /* Bold text */
+        }
+        .content {
+            flex: 1; /* Allow content to grow and push footer down */
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #ccc; /* Add border */
+            border-radius: 8px; /* Round corners */
+            background-color: white; /* White background for contrast */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin: 50px auto; /* Center the box */
+            width: 80%; /* Set a width for the box */
+            max-width: 500px; /* Maximum width for larger screens */
+        }
+        button {
+            background-color: green; /* Green for the confirm button */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px; /* Space between buttons */
+        }
+        button:hover {
+            background-color: darkgreen; /* Darker green on hover */
+        }
+        .cancel-button {
+            background-color: red; /* Red for the cancel button */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none; /* Remove underline from link */
+        }
+        .cancel-button:hover {
+            background-color: darkred; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="homepage.html">{% load static %} <img src="{% static 'kpmb.jpg' %}" alt="speedyrails"></a>
+        </div>
+        <h1>Confirm Joining Event</h1>
+        <nav>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; justify-content: center;">
+                <li style="margin: 0 15px;"><a href="homepage.html">Home</a></li>
+                <li style="margin: 0 15px;"><a href="index.html">Login</a></li>
+                <li style="margin: 0 15px;"><a href="#footer">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header><br><br><br><br><br>
+
+    <div class="content">
+        <h2>Are you sure you want to join the following event?</h2>
+        <p><strong>Event Name:</strong> {{ event.eventname }}</p>
+        <p><strong>Date:</strong> {{ event.date }}</p>
+        <p>{{ event.description }}</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit">Yes, Join Event</button>
+            <a href="{% url 'student_dashboard' student.studid %}" class="cancel-button">Cancel</a>
+        </form>
+    </div>
+
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer_cols">
+                <h3>MyKPMBEvents</h3>
+                <p>A website where you can explore and join as many event in KPMB. Gain experiences and enjoy college life.</p>
+            </div>
+            <div class="footer_cols">
+                <h4>CONTACT</h4>
+                <p>Phone No.: 012-345 6789</p>
+                <p>Email: MyKPMBEvents@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__bar">
+            <p>&copy; 2024 MyKPMBEvents. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

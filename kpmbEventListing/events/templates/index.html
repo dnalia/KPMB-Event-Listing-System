@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgb(240, 245, 255);
+        }
+        header {
+            background-color: rgb(255, 164, 168);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+        .logo img {
+            height: 80px;
+        }
+        .footer {
+            background-color: rgb(255, 164, 168);
+            color: #fff;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: relative;
+            margin-top: 20px;
+        }
+        .footer_cols {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px 20px;
+        }
+        .footer_cols h3, .footer_cols h4 {
+            margin-bottom: 20px;
+        }
+        .footer_cols p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        .footer__bar {
+            background-color: rgb(255, 112, 118);
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        .footer__bar p {
+            margin: 10px 0;
+        }
+        .socials {
+            display: flex;
+            justify-content: left;
+            margin-top: 20px;
+        }
+        .socials span {
+            margin: 0 10px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 24px;
+        }
+        .socials span:hover {
+            color: rgb(250, 100, 105);
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+        .content {
+            padding: 100px 20px 20px; /* Added padding to avoid overlap with fixed header */
+            text-align: center;
+            min-height: calc(100vh - 140px); /* Ensure enough space for header and footer */
+        }
+        .role-button {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: rgb(67, 175, 241); /* Button color */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .role-button:hover {
+            background-color: rgb(255, 112, 118); /* Color on hover */
+        }
+        .login-box {
+            display: inline-block; /* Center the box */
+            padding: 20px;
+            background-color: white; /* Box color */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            margin: 20px auto; /* Center the box */
+            max-width: 400px; /* Max width for the box */
+            text-align: center; /* Center text */
+        }
+        .login-box h2 {
+            margin: 0 0 20px; /* Margin for the heading */
+            color: rgb(67, 175, 241); /* Heading color */
+            font-size: 24px; /* Heading font size */
+        }
+        .login-box p {
+            margin-bottom: 20px; /* Space below paragraph */
+            font-size: 16px; /* Paragraph font size */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="homepage.html">{% load static %} <img src="{% static 'kpmb.jpg' %}" alt="speedyrails"></a>
+        </div>
+        <h1>Welcome to MyKPMBEvents Portal</h1>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="index.html">Login</a></li>
+                <li><a href="#footer">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header><br><br><br><br><br>
+    <div class="content">
+        <div class="login-box">
+            <h2>Select your role to proceed:</h2>
+            <p>Choose your role for the login</p>
+            <a href="{% url 'student_login' %}" class="role-button">Student Login</a>
+            <a href="{% url 'organizer_login' %}" class="role-button">Organizer Login</a>
+        </div>
+    </div>
+    
+    <footer id="footer">
+        <div class="footer">
+            <div class="footer_cols">
+                <h3>MyKPMBEvents</h3>
+                <p>A website where you can explore and join as many event in KPMB. Gain experiences and enjoy college life.</p>
+            </div>
+            <div class="footer_cols">
+                <h4>CONTACT</h4>
+                <p>Phone No.: 012-345 6789</p>
+                <p>Email: MyKPMBEvents@gmail.com</p>
+                <div class="socials">
+                    <a href=""><span><i class="fab fa-facebook-f"></i></span></a>
+                    <a href=""><span><i class="fab fa-twitter"></i></span></a>
+                    <a href=""><span><i class="fab fa-instagram"></i></span></a>
+                    <a href=""><span><i class="fab fa-youtube"></i></span></a>
+                    <a href=""><span><i class="fab fa-tiktok"></i></span></a>
+                    <a href=""><span><i class="fab fa-linkedin-in"></i></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bar">
+            <p>&copy; 2024 MyKPMBEvents. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
